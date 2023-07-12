@@ -29,11 +29,14 @@
             <ul class="list-unstyled">
             <?php while ($row = mysqli_fetch_assoc($select_categories_sidebar)) {
                 $category_title = $row['category_title'];
-
-                echo "<li>
-                        <a href='#'>{$category_title}</a>
-                      </li>";
-            } ?>
+                $category_id = $row['category_id'];
+            ?>
+                <li>
+                    <a href='category.php?category=<?php echo $category_id; ?>'>
+                        <?php echo $category_title; ?>
+                    </a>
+                </li>
+            <?php } ?>
             </ul>
         </div>
 
