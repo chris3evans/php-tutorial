@@ -46,14 +46,29 @@
                <?php } ?>
                 <hr>
 
+                <?php
+                    if (isset($_POST['create_comment'])) {
+                        echo "hello there";
+                    }
+                ?>
+
                 <!-- Comments Form -->
                 <div class="well">
                     <h4>Leave a Comment:</h4>
-                    <form role="form">
+                    <form role="form" method="post" action ="">
                         <div class="form-group">
-                            <textarea class="form-control" rows="3"></textarea>
+                            <label for="comment_author">Author</label>
+                            <input type="text" name="comment_author" class="form-control"/>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <div class="form-group">
+                            <label for="comment_email">Email</label>
+                            <input type="email" name="comment_email" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label for="comment_content">Your Comment</label>
+                            <textarea class="form-control" name="comment_content" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" name="create_comment">Submit</button>
                     </form>
                 </div>
 
