@@ -36,7 +36,6 @@
         <td><?php echo $comment_content;?></td>
         <td><?php echo $comment_email;?></td>
         <td><?php echo $comment_status;?></td>
-        <td><?php echo $comment_status;?></td>
         <td>user John Doe</td>
         <td><?php echo $comment_date;?></td>
         <td>
