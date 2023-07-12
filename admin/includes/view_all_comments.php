@@ -3,63 +3,50 @@
     <tr>
       <th>Id</th>
       <th>Author</th>
-      <th>Title</th>
-      <th>Category</th>
+      <th>Comment</th>
+      <th>Email</th>
       <th>Status</th>
-      <th>Image</th>
-      <th>Tags</th>
-      <th>Comments</th>
+      <th>In Response To</th>
       <th>Date</th>
+      <th>Approve</th>
+      <th>Unapprove</th>
+      <th>Delete</th>
     </tr>
   </thead>
 
   <tbody>
     <?php
-      $query = "SELECT * FROM posts";
-      $posts_query = mysqli_query($db_connection, $query);
+      $query = "SELECT * FROM comments";
+      $query_all_comments = mysqli_query($db_connection, $query);
 
-      if (!$posts_query) { die("Failed to fetch all posts"); }
+      if (!$query_all_comments) { die("Failed to fetch all posts"); }
 
-      while ($row = mysqli_fetch_assoc($posts_query)) {
-        $post_id = $row['post_id'];
-        $post_author = $row['post_author'];
-        $post_title = $row['post_title'];
-        $post_category_id = $row['post_category_id'];
-        $post_status = $row['post_status'];
-        $post_image = $row['post_image'];
-        $post_tags = $row['post_tags'];
-        $post_comment_count = $row['post_comment_count'];
-        $post_date = $row['post_date'];
+      while ($row = mysqli_fetch_assoc($query_all_comments)) {
+        $comment_id = $row['comment_id'];
+        $comment_post_id = $row['comment_post_id'];
+        $comment_author = $row['comment_author'];
+        $comment_email = $row['comment_email'];
+        $comment_content = $row['comment_content'];
+        $comment_status = $row['comment_status'];
+        $comment_date = $row['comment_date'];
     ?>
       <tr>
-        <td><?php echo $post_id;?></td>
-        <td><?php echo $post_author;?></td>
-        <td><?php echo $post_title;?></td>
-
-        <?php
-          $query = "SELECT * FROM categories WHERE category_id = {$post_category_id}";
-          $query_categories = mysqli_query($db_connection, $query);
-
-          while ($row = mysqli_fetch_assoc($query_categories)) {
-            $category_id = $row['category_id'];
-            $category_title = $row['category_title'];
-
-        ?>
-        <td><?php echo $category_title;?></td>
-        <?php  } ?>
-
-        <td><?php echo $post_status;?></td>
+        <td><?php echo $comment_id;?></td>
+        <td><?php echo $comment_author;?></td>
+        <td><?php echo $comment_content;?></td>
+        <td><?php echo $comment_email;?></td>
+        <td><?php echo $comment_status;?></td>
+        <td><?php echo $comment_status;?></td>
+        <td>user John Doe</td>
+        <td><?php echo $comment_date;?></td>
         <td>
-          <img style="height: 100px; width: auto;" src="../images/<?php echo $post_image;?>" />
-        </td>
-        <td><?php echo $post_tags;?></td>
-        <td><?php echo $post_comment_count;?></td>
-        <td><?php echo $post_date;?></td>
-        <td>
-          <a href="posts.php?source=edit_post&p_id=<?php echo $post_id; ?>">Edit</a>
+          <a href="#">Approve</a>
         </td>
         <td>
-          <a href="posts.php?delete=<?php echo $post_id; ?>">Delete</a>
+          <a href="#">Unapprove</a>
+        </td>
+        <td>
+          <a href="#">Delete</a>
         </td>
       </tr>
     <?php } ?>
