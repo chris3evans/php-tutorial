@@ -17,7 +17,7 @@
                 <?php
                     if (isset($_GET['p_id'])) {
                         $post_id = $_GET['p_id'];
-                    }
+
 
                     $query = "SELECT * FROM posts WHERE post_id = '{$post_id}'";
                     $all_posts = mysqli_query($db_connection, $query);
@@ -29,7 +29,6 @@
                         $post_image = $row['post_image'];
                         $post_content = $row['post_content'];
                         $post_tags = $row['post_tags'];
-
                 ?>
                     <h2>
                         <a href='#'><?php echo $post_title;?></a>
@@ -43,15 +42,15 @@
                     <hr>
                     <p><?php echo $post_content;?></p>
                     <a class='btn btn-primary' href='#'>Read More <span class='glyphicon glyphicon-chevron-right'></span></a>
-               <?php } ?>
+               <?php }} ?>
                 <hr>
 
                 <?php
                     if (isset($_POST['create_comment'])) {
                         $post_id = $_GET['p_id'];
                         $comment_author = $_POST['comment_author'];
-                        $comment_email = $_POST['post_email'];
-                        $comment_content = $_POST['post_content'];
+                        $comment_email = $_POST['comment_email'];
+                        $comment_content = $_POST['comment_content'];
 
                         $query = "INSERT INTO comments (
                             comment_post_id,
@@ -67,7 +66,12 @@
                             '{$comment_content}',
                             'unapproved',
                             now()
-                            )";
+                        )";
+                        $add_comment_query = mysqli_query($db_connection, $query);
+
+                        if (!$add_comment_query) {
+                            die("failed to add comment to post");
+                        }
                     }
                 ?>
 
