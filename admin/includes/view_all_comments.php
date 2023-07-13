@@ -53,10 +53,10 @@
 
         <td><?php echo $comment_date;?></td>
         <td>
-          <a href="#">Approve</a>
+          <a href="comments.php?approve=<?php echo $comment_id;?>">Approve</a>
         </td>
         <td>
-          <a href="#">Unapprove</a>
+          <a href="comments.php?unapprove=<?php echo $comment_id;?>">Unapprove</a>
         </td>
         <td>
           <a href="comments.php?delete=<?php echo $comment_id;?>">Delete</a>
@@ -65,6 +65,26 @@
     <?php } ?>
   </tbody>
 </table>
+
+<?php
+  if (isset($_GET['unapprove'])) {
+    $unapprove_comment_id = $_GET['unapprove'];
+
+    $query = "UPDATE comments SET comment_status = 'unapproved' WHERE comment_id = {$unapprove_comment_id}";
+    $update_unapprove_query = mysqli_query($db_connection, $query);
+    header("Location: comments.php");
+  }
+?>
+
+<?php
+  if (isset($_GET['approve'])) {
+    $approve_comment_id = $_GET['approve'];
+
+    $query = "UPDATE comments SET comment_status = 'approved' WHERE comment_id = {$approve_comment_id}";
+    $update_approve_query = mysqli_query($db_connection, $query);
+    header("Location: comments.php");
+  }
+?>
 
 <?php
   if (isset($_GET['delete'])) {
