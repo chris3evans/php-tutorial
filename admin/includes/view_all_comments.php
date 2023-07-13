@@ -66,6 +66,7 @@
   </tbody>
 </table>
 
+<!-- Unapprove Comment -->
 <?php
   if (isset($_GET['unapprove'])) {
     $unapprove_comment_id = $_GET['unapprove'];
@@ -76,6 +77,7 @@
   }
 ?>
 
+<!-- Approve Comment -->
 <?php
   if (isset($_GET['approve'])) {
     $approve_comment_id = $_GET['approve'];
@@ -86,6 +88,7 @@
   }
 ?>
 
+<!-- Delete Comment -->
 <?php
   if (isset($_GET['delete'])) {
     $comment_id = $_GET['delete'];
