@@ -59,7 +59,7 @@
           <a href="#">Unapprove</a>
         </td>
         <td>
-          <a href="#">Delete</a>
+          <a href="comments.php?delete=<?php echo $comment_id;?>">Delete</a>
         </td>
       </tr>
     <?php } ?>
@@ -68,9 +68,10 @@
 
 <?php
   if (isset($_GET['delete'])) {
-    $post_id = $_GET['delete'];
-    $query = "DELETE FROM posts WHERE post_id = '$post_id'";
-    $delete_query = mysqli_query($db_connection, $query);
-    header("Location: posts.php");
+    $comment_id = $_GET['delete'];
+    $query = "DELETE FROM comments WHERE comment_id = {$comment_id}";
+
+    $delete_comment_query = mysqli_query($db_connection, $query);
+    header("Location: comments.php");
   }
 ?>
