@@ -36,7 +36,21 @@
         <td><?php echo $comment_content;?></td>
         <td><?php echo $comment_email;?></td>
         <td><?php echo $comment_status;?></td>
-        <td>user John Doe</td>
+
+        <?php
+          $query = "SELECT * FROM posts WHERE post_id = $comment_post_id";
+          $select_post_query = mysqli_query($db_connection, $query);
+
+          while ($row = mysqli_fetch_assoc($select_post_query)) {
+            $post_id = $row['post_id'];
+            $post_title = $row['post_title']
+          ?>
+
+        <td>
+            <a href="../post.php?p_id=<?php echo $post_id; ?>"><?php echo $post_title; ?></a>
+        </td>
+        <?php } ?>
+
         <td><?php echo $comment_date;?></td>
         <td>
           <a href="#">Approve</a>
