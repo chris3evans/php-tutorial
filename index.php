@@ -26,7 +26,11 @@
                         $post_image = $row['post_image'];
                         $post_content = substr($row['post_content'], 0, 50);
                         $post_tags = $row['post_tags'];
+                        $post_status = $row['post_status'];
 
+                        if ($post_status !== 'published') {
+                            echo "<h1 class='text-center'>No posts have been published yet!";
+                        } else {
                 ?>
                     <h2>
                         <a href='post.php?p_id=<?php echo $post_id; ?>'><?php echo $post_title;?></a>
@@ -40,7 +44,9 @@
                     <hr>
                     <p><?php echo $post_content;?></p>
                     <a class='btn btn-primary' href='#'>Read More <span class='glyphicon glyphicon-chevron-right'></span></a>
-               <?php } ?>
+
+                    <hr>
+               <?php } }?>
             </div>
 
             <!-- Blog Sidebar Widgets Column -->
