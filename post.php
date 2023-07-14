@@ -72,6 +72,10 @@
                         if (!$add_comment_query) {
                             die("failed to add comment to post");
                         }
+
+                        $query = "UPDATE posts SET post_comment_count = post_comment_count + 1 WHERE post_id = $post_id";
+
+                        $update_comment_count_query = mysqli_query($db_connection, $query);
                     }
                 ?>
 
