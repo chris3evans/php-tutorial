@@ -13,32 +13,34 @@
 
   <tbody>
     <?php
-      $query = "SELECT * FROM comments";
-      $query_all_comments = mysqli_query($db_connection, $query);
+      $query = "SELECT * FROM users";
+      $query_all_users = mysqli_query($db_connection, $query);
 
-      if (!$query_all_comments) { die("Failed to fetch all posts"); }
+      if (!$query_all_users) { die("Failed to fetch all users"); }
 
-      while ($row = mysqli_fetch_assoc($query_all_comments)) {
-        $comment_id = $row['comment_id'];
-        $comment_post_id = $row['comment_post_id'];
-        $comment_author = $row['comment_author'];
-        $comment_email = $row['comment_email'];
-        $comment_content = $row['comment_content'];
-        $comment_status = $row['comment_status'];
-        $comment_date = $row['comment_date'];
+      while ($row = mysqli_fetch_assoc($query_all_users)) {
+        $user_id = $row['user_id'];
+        $user_name = $row['user_name'];
+        $user_password = $row['user_password'];
+        $user_first_name = $row['first_name'];
+        $user_last_name = $row['user_last_name'];
+        $user_email = $row['user_email'];
+        $user_image = $row['user_image'];
+        $user_role = $row['user_role'];
     ?>
       <tr>
-        <td><?php echo $comment_id;?></td>
-        <td><?php echo $comment_author;?></td>
-        <td><?php echo $comment_content;?></td>
-        <td><?php echo $comment_email;?></td>
-        <td><?php echo $comment_status;?></td>
+        <td><?php echo $user_id;?></td>
+        <td><?php echo $user_name;?></td>
+        <td><?php echo $user_first_name;?></td>
+        <td><?php echo $user_last_name;?></td>
+        <td><?php echo $user_email;?></td>
+        <td><?php echo $user_role;?></td>
 
         <?php
-          $query = "SELECT * FROM posts WHERE post_id = $comment_post_id";
-          $select_post_query = mysqli_query($db_connection, $query);
+          $query = "SELECT * FROM users WHERE user_id = $user_id";
+          $select_user_query = mysqli_query($db_connection, $query);
 
-          while ($row = mysqli_fetch_assoc($select_post_query)) {
+          while ($row = mysqli_fetch_assoc($select_user_query)) {
             $post_id = $row['post_id'];
             $post_title = $row['post_title']
           ?>
