@@ -7,7 +7,6 @@
       <th>Last Name</th>
       <th>Email</th>
       <th>Role</th>
-      <th>Date</th>
     </tr>
   </thead>
 
@@ -35,33 +34,18 @@
         <td><?php echo $user_last_name;?></td>
         <td><?php echo $user_email;?></td>
         <td><?php echo $user_role;?></td>
-
-        <?php
-          $query = "SELECT * FROM users WHERE user_id = $user_id";
-          $select_user_query = mysqli_query($db_connection, $query);
-
-          while ($row = mysqli_fetch_assoc($select_user_query)) {
-            $post_id = $row['post_id'];
-            $post_title = $row['post_title']
-          ?>
-
         <td>
-            <a href="../post.php?p_id=<?php echo $post_id; ?>"><?php echo $post_title; ?></a>
-        </td>
-        <?php } ?>
-
-        <td><?php echo $comment_date;?></td>
-        <td>
-          <a href="comments.php?approve=<?php echo $comment_id;?>">Approve</a>
+          <a href="comments.php?approve='">Approve</a>
         </td>
         <td>
-          <a href="comments.php?unapprove=<?php echo $comment_id;?>">Unapprove</a>
+          <a href="comments.php?unapprove='">Unapprove</a>
         </td>
         <td>
-          <a href="comments.php?delete=<?php echo $comment_id;?>">Delete</a>
+          <a href="comments.php?delete='">Delete</a>
         </td>
       </tr>
-    <?php } ?>
+
+      <?php } ?>
   </tbody>
 </table>
 
