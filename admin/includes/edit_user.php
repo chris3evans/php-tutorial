@@ -22,26 +22,16 @@
     $user_email = $_POST['user_email'];
     $user_role = $_POST['user_role'];
 
-    // $user_image = $_FILES['user_image']['name'];
-    // $user_image_temp = $_FILES['user_image']['tmp_name'];
-    // move_uploaded_file($user_image_temp, "../images/{$user_image}");
+    $query = "UPDATE users SET
+      user_name = '{$user_name}',
+      user_password = '{$user_password}',
+      first_name = '{$user_first_name}',
+      user_last_name = '{$user_last_name}',
+      user_email = '{$user_email}',
+      user_role = '{$user_role}'
+      WHERE user_id = {$user_id}";
 
-    $query = "INSERT INTO users (
-      user_name,
-      user_password,
-      first_name,
-      user_last_name,
-      user_email,
-      user_role) VALUES (
-      '{$user_name}',
-      '{$user_password}',
-      '{$user_first_name}',
-      '{$user_last_name}',
-      '{$user_email}',
-      '{$user_role}')";
-
-    $add_user_query = mysqli_query($db_connection, $query);
-    check_query($add_user_query);
+    $edit_user_query = mysqli_query($db_connection, $query);
   }
 ?>
 
@@ -62,18 +52,12 @@
       <?php
         if ($user_role == 'admin') {
           echo "<option value='subscriber'>Subscriber</option>";
-        }
-        if ($user_role == 'subscriber') {
+        } else {
           echo "<option value='admin'>Admin</option>";
         }
       ?>
     </select>
   </div>
-
-  <!-- <div class="form-group">
-    <label for="post_image"></label>
-    <input type="file" class="form-control" name="post_image" />
-  </div> -->
 
   <div class="form-group">
     <label for="user_name">Username</label>
@@ -91,6 +75,6 @@
   </div>
 
   <div class="form-group">
-    <input class="btn btn-primary" type="submit" name="edit_user" value="Add User" />
+    <input class="btn btn-primary" type="submit" name="edit_user" value="Edit User" />
   </div>
 </form>
