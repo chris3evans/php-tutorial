@@ -41,7 +41,7 @@
           <a href="users.php?to_subscriber=<?php echo $user_id;?>">Subscriber</a>
         </td>
         <td>
-          <a href="users.php?source=edit_user&=<?php echo $user_id;?>">Edit</a>
+          <a href="users.php?source=edit_user&edit_user=<?php echo $user_id;?>">Edit</a>
         </td>
         <td>
           <a href="users.php?delete=<?php echo $user_id;?>">Delete</a>
