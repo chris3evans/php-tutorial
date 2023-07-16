@@ -41,13 +41,23 @@
           <a href="comments.php?unapprove='">Unapprove</a>
         </td>
         <td>
-          <a href="comments.php?delete='">Delete</a>
+          <a href="users.php?delete=<?php echo $user_id;?>">Delete</a>
         </td>
       </tr>
 
       <?php } ?>
   </tbody>
 </table>
+
+<?php
+  if (isset($_GET['delete'])) {
+    $comment_id = $_GET['delete'];
+    $query = "DELETE FROM comments WHERE comment_id = {$comment_id}";
+
+    $delete_comment_query = mysqli_query($db_connection, $query);
+    header("Location: comments.php");
+  }
+?>
 
 <!-- Unapprove Comment -->
 <?php
@@ -74,10 +84,10 @@
 <!-- Delete Comment -->
 <?php
   if (isset($_GET['delete'])) {
-    $comment_id = $_GET['delete'];
-    $query = "DELETE FROM comments WHERE comment_id = {$comment_id}";
+    $user_id = $_GET['delete'];
+    $query = "DELETE FROM users WHERE user_id = {$user_id}";
 
-    $delete_comment_query = mysqli_query($db_connection, $query);
-    header("Location: comments.php");
+    $delete_user_query = mysqli_query($db_connection, $query);
+    header("Location: users.php");
   }
 ?>
