@@ -1,118 +1,81 @@
 <?php
-if (isset($_GET["p_id"])) {
-  $the_post_id = $_GET['p_id'];
-}
-  $query = "SELECT * FROM posts WHERE post_id = '$the_post_id'";
-  $edit_query = mysqli_query($db_connection, $query);
+  if (isset($_GET['edit_user'])) {
+    $user_id = $_GET['edit_user'];
+  }
+?>
 
-  while ($row = mysqli_fetch_assoc($edit_query)) {
-    $post_id = $row['post_id'];
-    $post_author = $row['post_author'];
-    $post_title = $row['post_title'];
-    $post_category_id = $row['post_category_id'];
-    $post_status = $row['post_status'];
-    $post_image = $row['post_image'];
-    $post_tags = $row['post_tags'];
-    $post_comment_count = $row['post_comment_count'];
-    $post_date = $row['post_date'];
-    $post_content = $row['post_content'];
+<?php
+  if (isset($_POST['edit_user'])) {
+    $user_name = $_POST['user_name'];
+    $user_password = $_POST['user_password'];
+    $user_first_name = $_POST['user_first_name'];
+    $user_last_name = $_POST['user_last_name'];
+    $user_email = $_POST['user_email'];
+    $user_role = $_POST['user_role'];
 
-    if (isset($_POST['update_post'])) {
-      $post_author = $_POST['post_author'];
-      $post_title = $_POST['post_title'];
-      $post_category_id = $_POST['post_category'];
-      $post_status = $_POST['post_status'];
-      $post_image = $_FILES['post_image']['name'];
-      $post_image_temp = $_FILES['post_image']['tmp_name'];
-      $post_content = $_POST['post_content'];
-      $post_tags = $_POST['post_tags'];
+    // $user_image = $_FILES['user_image']['name'];
+    // $user_image_temp = $_FILES['user_image']['tmp_name'];
+    // move_uploaded_file($user_image_temp, "../images/{$user_image}");
 
-      move_uploaded_file($post_image_temp, "../images/$post_image");
+    $query = "INSERT INTO users (
+      user_name,
+      user_password,
+      first_name,
+      user_last_name,
+      user_email,
+      user_role) VALUES (
+      '{$user_name}',
+      '{$user_password}',
+      '{$user_first_name}',
+      '{$user_last_name}',
+      '{$user_email}',
+      '{$user_role}')";
 
-      if (empty($post_image)) {
-        $query = "SELECT * FROM posts WHERE post_id = $the_post_id";
-        $select_image = mysqli_query($db_connection, $query);
-
-        while ($row = mysqli_fetch_assoc($select_image)) {
-          $post_image = $row['post_image'];
-        }
-      }
-
-      $query = "UPDATE posts SET
-        post_title = '{$post_title}',
-        post_category_id = '{$post_category_id}',
-        post_date = now(),
-        post_author = '{$post_author}',
-        post_status = '{$post_status}',
-        post_tags = '{$post_tags}',
-        post_content = '{$post_content}',
-        post_image = '{$post_image}'
-        WHERE post_id = {$post_id}";
-
-      $update_post = mysqli_query($db_connection, $query);
-
-      check_query($update_post);
-    }
+    $add_user_query = mysqli_query($db_connection, $query);
+    check_query($add_user_query);
+  }
 ?>
 
 <form action="" method="post" enctype="multipart/form-data">
   <div class="form-group">
-    <label for="post_title">Post Title</label>
-    <input type="text" class="form-control" name="post_title"
-           value="<?php if (isset($post_title)) echo $post_title; ?>"/>
+    <label for="user_first_name">First Name</label>
+    <input type="text" class="form-control" name="user_first_name" />
   </div>
 
   <div class="form-group">
-    <select name="post_category" id="">
-      <?php
-        $query = "SELECT * FROM categories";
-        $select_category_query = mysqli_query($db_connection, $query);
-        check_query($select_category_query);
+    <label for="user_last_name">Last Name</label>
+    <input type="text" class="form-control" name="user_last_name" />
+  </div>
 
-        while ($row = mysqli_fetch_assoc($select_category_query)) {
-          $category_title = $row['category_title'];
-          $category_id = $row['category_id'];
-      ?>
-        <option value="<?php echo $category_id; ?>"><?php echo $category_title; ?></option>
-
-  <?php } ?>
-
+  <div class="form-group">
+    <select name="user_role" id="">
+      <option value="subsriber">Select User Role</option>
+      <option value="admin">Admin</option>
+      <option value="subscriber">Subscriber</option>
     </select>
   </div>
 
-  <div class="form-group">
-    <label for="post_author">Post Author</label>
-    <input type="text" class="form-control" name="post_author"
-           value="<?php if (isset($post_author)) echo $post_author; ?>"/>
-  </div>
-
-  <div class="form-group">
-    <label for="post_status">Post Status</label>
-    <input type="text" class="form-control" name="post_status"
-           value="<?php if (isset($post_status)) echo $post_status; ?>"/>
-  </div>
-
-  <div class="form-group">
-    <label for="post_image">Post Image</label>
-    <img src="../images/<?php echo $post_image;?>" width="100"/>
+  <!-- <div class="form-group">
+    <label for="post_image"></label>
     <input type="file" class="form-control" name="post_image" />
+  </div> -->
+
+  <div class="form-group">
+    <label for="user_name">Username</label>
+    <input type="text" class="form-control" name="user_name" />
   </div>
 
   <div class="form-group">
-    <label for="post_tags">Post Tags</label>
-    <input type="text" class="form-control" name="post_tags"
-           value="<?php if (isset($post_tags)) echo $post_tags; ?>"/>
+    <label for="user_email">Email</label>
+    <input type="email" class="form-control" name="user_email" />
   </div>
 
   <div class="form-group">
-    <label for="post_content">Post Content</label>
-    <textarea class="form-control" name="post_content" id="" cols="30" rows="10"
-    ><?php if (isset($post_content)) echo $post_content; ?></textarea>
+    <label for="user_password">Password</label>
+    <input type="password" class="form-control" name="user_password" />
   </div>
 
   <div class="form-group">
-    <input class="btn btn-primary" type="submit" name="update_post" value="Update Post" />
+    <input class="btn btn-primary" type="submit" name="edit_user" value="Add User" />
   </div>
 </form>
-
-<?php }?>
