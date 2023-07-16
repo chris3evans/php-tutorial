@@ -7,9 +7,9 @@
     $user_email = $_POST['user_email'];
     $user_role = $_POST['user_role'];
 
-    $user_image = $_FILES['user_image']['name'];
-    $user_image_temp = $_FILES['user_image']['tmp_name'];
-    move_uploaded_file($user_image_temp, "../images/{$user_image}");
+    // $user_image = $_FILES['user_image']['name'];
+    // $user_image_temp = $_FILES['user_image']['tmp_name'];
+    // move_uploaded_file($user_image_temp, "../images/{$user_image}");
 
     $query = "INSERT INTO users (
       user_name,
@@ -17,14 +17,12 @@
       first_name,
       user_last_name,
       user_email,
-      user_image,
       user_role) VALUES (
       '{$user_name}',
-      '{$user_password}'
-      '{$user_first_name}'
-      '{$user_last_name}'
-      '{$user_email}'
-      '{$user_image}'
+      '{$user_password}',
+      '{$user_first_name}',
+      '{$user_last_name}',
+      '{$user_email}',
       '{$user_role}')";
 
     $add_user_query = mysqli_query($db_connection, $query);
