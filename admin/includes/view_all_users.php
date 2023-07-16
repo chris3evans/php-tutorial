@@ -35,10 +35,10 @@
         <td><?php echo $user_email;?></td>
         <td><?php echo $user_role;?></td>
         <td>
-          <a href="comments.php?approve='">Approve</a>
+          <a href="users.php?to_admin=<?php echo $user_id;?>">Admin</a>
         </td>
         <td>
-          <a href="comments.php?unapprove='">Unapprove</a>
+          <a href="users.php?to_subscriber=<?php echo $user_id;?>">Subscriber</a>
         </td>
         <td>
           <a href="users.php?delete=<?php echo $user_id;?>">Delete</a>
@@ -49,39 +49,29 @@
   </tbody>
 </table>
 
+<!-- Change User To Admin Role -->
 <?php
-  if (isset($_GET['delete'])) {
-    $comment_id = $_GET['delete'];
-    $query = "DELETE FROM comments WHERE comment_id = {$comment_id}";
+  if (isset($_GET['to_admin'])) {
+    $user_id = $_GET['to_admin'];
+    $query = "UPDATE users SET user_role = 'admin' WHERE user_id = {$user_id}";
 
-    $delete_comment_query = mysqli_query($db_connection, $query);
-    header("Location: comments.php");
+    $to_admin_query = mysqli_query($db_connection, $query);
+    header("Location: users.php");
   }
 ?>
 
-<!-- Unapprove Comment -->
+<!-- Change User To Subscriber Role -->
 <?php
-  if (isset($_GET['unapprove'])) {
-    $unapprove_comment_id = $_GET['unapprove'];
+  if (isset($_GET['to_subscriber'])) {
+    $user_id = $_GET['to_subscriber'];
+    $query = "UPDATE users SET user_role = 'subscriber' WHERE user_id = {$user_id}";
 
-    $query = "UPDATE comments SET comment_status = 'unapproved' WHERE comment_id = {$unapprove_comment_id}";
-    $update_unapprove_query = mysqli_query($db_connection, $query);
-    header("Location: comments.php");
+    $to_subscriber_query = mysqli_query($db_connection, $query);
+    header("Location: users.php");
   }
 ?>
 
-<!-- Approve Comment -->
-<?php
-  if (isset($_GET['approve'])) {
-    $approve_comment_id = $_GET['approve'];
-
-    $query = "UPDATE comments SET comment_status = 'approved' WHERE comment_id = {$approve_comment_id}";
-    $update_approve_query = mysqli_query($db_connection, $query);
-    header("Location: comments.php");
-  }
-?>
-
-<!-- Delete Comment -->
+<!-- Delete User -->
 <?php
   if (isset($_GET['delete'])) {
     $user_id = $_GET['delete'];
