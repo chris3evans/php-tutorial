@@ -38,54 +38,70 @@
 
 <form action="" method="post" enctype="multipart/form-data">
   <div class="form-group">
-    <label for="post_title">Post Title</label>
-    <input type="text" class="form-control" name="post_title" />
+    <label for="user_first_name">First Name</label>
+    <input type="text" class="form-control" name="user_first_name" />
   </div>
 
   <div class="form-group">
-    <select name="post_category" id="">
+    <label for="user_last_name">Last Name</label>
+    <input type="text" class="form-control" name="user_last_name" />
+  </div>
 
-  <?php
-    $query = "SELECT * FROM categories";
-    $query_all_categories = mysqli_query($db_connection, $query);
+  <div class="form-group">
+    <select name="user_role" id="">
+      <?php
+        $query = "SELECT * FROM users";
+        $all_users_query = mysqli_query($db_connection, $query);
+        check_query($all_users_query);
 
-    check_query($query_all_categories);
-
-    while ($row = mysqli_fetch_assoc($query_all_categories)) {
-      $category_id = $row['category_id'];
-      $category_title = $row['category_title'];
-  ?>
-    <option value="<?php echo $category_id; ?>"><?php echo $category_title; ?></option>
-  <?php } ?>
+        while ($row = mysqli_fetch_assoc($all_users_query)) {
+          $user_id = $row['user_id'];
+          $user_role = $row['user_role'];
+        ?>
+        <option value="<?php echo $user_id;?>"><?php echo $user_role;?></option>
+        <?php }?>
     </select>
   </div>
 
-  <div class="form-group">
-    <label for="post_author">Post Author</label>
-    <input type="text" class="form-control" name="post_author" />
-  </div>
-
-  <div class="form-group">
-    <label for="post_status">Post Status</label>
-    <input type="text" class="form-control" name="post_status" />
-  </div>
-
-  <div class="form-group">
-    <label for="post_image">Post Image</label>
+  <!-- <div class="form-group">
+    <label for="post_image"></label>
     <input type="file" class="form-control" name="post_image" />
+  </div> -->
+
+  <div class="form-group">
+    <label for="user_name">Username</label>
+    <input type="text" class="form-control" name="user_name" />
   </div>
 
   <div class="form-group">
-    <label for="post_tags">Post Tags</label>
-    <input type="text" class="form-control" name="post_tags" />
+    <label for="user_email">Email</label>
+    <input type="email" class="form-control" name="user_email" />
   </div>
 
   <div class="form-group">
-    <label for="post_content">Post Content</label>
-    <textarea class="form-control" name="post_content" id="" cols="30" rows="10"></textarea>
+    <label for="user_password">Password</label>
+    <input type="password" class="form-control" name="user_password" />
   </div>
 
   <div class="form-group">
-    <input class="btn btn-primary" type="submit" name="create_post" value="Publish Post" />
+    <input class="btn btn-primary" type="submit" name="create_user" value="Add User" />
   </div>
 </form>
+
+
+<div class="form-group">
+    <select name="post_category" id="">
+    <?php
+      $query = "SELECT * FROM categories";
+      $query_all_categories = mysqli_query($db_connection, $query);
+
+      check_query($query_all_categories);
+
+      while ($row = mysqli_fetch_assoc($query_all_categories)) {
+        $category_id = $row['category_id'];
+        $category_title = $row['category_title'];
+    ?>
+      <option value="<?php echo $category_id; ?>"><?php echo $category_title; ?></option>
+      <?php } ?>
+    </select>
+  </div>
