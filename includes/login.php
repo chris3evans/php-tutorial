@@ -5,7 +5,19 @@
     $login_username = $_POST['username'];
     $login_password = $_POST['password'];
 
-    echo $login_password . $login_username;
+    $login_username = mysqli_real_escape_string($db_connection, $login_username);
+    $login_password = mysqli_real_escape_string($db_connection, $login_password);
+
+    $query = "SELECT * FROM users WHERE user_name = '{$login_username}'";
+    $check_username_query = mysqli_query($db_connection, $query);
+
+    if (!$check_username_query) {
+      die("Failed to find a user with the entered username!" . mysqli_error($db_connection));
+    }
+
+    while ($row = mysqli_fetch_assoc($check_username_query)) {
+      echo $id = $row['user_name'];
+    }
   }
 ?>
 
