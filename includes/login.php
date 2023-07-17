@@ -16,7 +16,20 @@
     }
 
     while ($row = mysqli_fetch_assoc($check_username_query)) {
-      echo $id = $row['user_name'];
+      $user_id = $row['user_id'];
+      $user_name = $row['user_name'];
+      $user_password = $row['user_password'];
+      $user_first_name = $row['first_name'];
+      $user_last_name = $row['user_last_name'];
+      $user_role = $row['user_role'];
+    }
+
+    if ($login_username !== $user_name && $login_password !== $user_password) {
+      header("Location: ../index.php");
+    } else if ($login_username == $user_name && $login_password == $user_password) {
+      header("Location: ../admin/index.php");
+    } else {
+      header("Location: ../index.php");
     }
   }
 ?>
