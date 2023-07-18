@@ -3,7 +3,20 @@
 
 <?php
   if (isset($_SESSION['username'])) {
+    $user_name = $_SESSION['username'];
+    $query = "SELECT * FROM users WHERE user_name = '{$user_name}'";
 
+    $get_user_profile_query = mysqli_query($db_connection, $query);
+
+    while ($row = mysqli_fetch_assoc($get_user_profile_query)) {
+      $user_id = $row['user_id'];
+      $user_name = $row['user_name'];
+      $user_password = $row['user_password'];
+      $user_first_name = $row['first_name'];
+      $user_last_name = $row['user_last_name'];
+      $user_email = $row['user_email'];
+      $user_role = $row['user_role'];
+    }
   }
 ?>
 
@@ -23,43 +36,6 @@
                             Users
                             <small>Author Name</small>
                         </h1>
-
-                        <?php
-                          if (isset($_GET['edit_user'])) {
-                            $user_id = $_GET['edit_user'];
-                            $query = "SELECT * FROM users WHERE user_id = {$user_id}";
-                            $current_user_info_query = mysqli_query($db_connection, $query);
-
-                            while($row = mysqli_fetch_assoc($current_user_info_query)) {
-                              $username = $row['user_name'];
-                              $user_password = $row['user_password'];
-                              $user_first_name = $row['first_name'];
-                              $user_last_name = $row['user_last_name'];
-                              $user_email = $row['user_email'];
-                              $user_role = $row['user_role'];
-                            }
-                          }
-
-                          if (isset($_POST['edit_user'])) {
-                            $user_name = $_POST['user_name'];
-                            $user_password = $_POST['user_password'];
-                            $user_first_name = $_POST['user_first_name'];
-                            $user_last_name = $_POST['user_last_name'];
-                            $user_email = $_POST['user_email'];
-                            $user_role = $_POST['user_role'];
-
-                            $query = "UPDATE users SET
-                              user_name = '{$user_name}',
-                              user_password = '{$user_password}',
-                              first_name = '{$user_first_name}',
-                              user_last_name = '{$user_last_name}',
-                              user_email = '{$user_email}',
-                              user_role = '{$user_role}'
-                              WHERE user_id = {$user_id}";
-
-                            $edit_user_query = mysqli_query($db_connection, $query);
-                          }
-                        ?>
 
                         <form action="" method="post" enctype="multipart/form-data">
                           <div class="form-group">
@@ -87,7 +63,7 @@
 
                           <div class="form-group">
                             <label for="user_name">Username</label>
-                            <input type="text" class="form-control" name="user_name" value="<?php echo $username; ?>"/>
+                            <input type="text" class="form-control" name="user_name" value="<?php echo $user_name; ?>"/>
                           </div>
 
                           <div class="form-group">
@@ -101,7 +77,7 @@
                           </div>
 
                           <div class="form-group">
-                            <input class="btn btn-primary" type="submit" name="edit_user" value="Edit User" />
+                            <input class="btn btn-primary" type="submit" name="edit_user" value="Update Profile" />
                           </div>
                         </form>
                     </div>
