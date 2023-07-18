@@ -17,6 +17,27 @@
       $user_email = $row['user_email'];
       $user_role = $row['user_role'];
     }
+
+    if (isset($_POST['update_profile'])) {
+      $update_user_name = $_POST['user_name'];
+      $update_user_password = $_POST['user_password'];
+      $update_user_first_name = $_POST['user_first_name'];
+      $update_user_last_name = $_POST['user_last_name'];
+      $update_user_email = $_POST['user_email'];
+      $update_user_role = $_POST['user_role'];
+
+      $query = "UPDATE users SET
+        user_name = '{$update_user_name}',
+        first_name = '{$update_user_first_name}',
+        user_last_name = '{$update_user_last_name}',
+        user_email = '{$update_user_email}',
+        user_password = '{$update_user_password}',
+        user_role = '{$update_user_role}'
+        WHERE user_name = '{$user_name}'";
+
+      $update_profile_query = mysqli_query($db_connection, $query);
+      header("Location: users.php");
+    }
   }
 ?>
 
@@ -77,7 +98,7 @@
                           </div>
 
                           <div class="form-group">
-                            <input class="btn btn-primary" type="submit" name="edit_user" value="Update Profile" />
+                            <input class="btn btn-primary" type="submit" name="update_profile" value="Update Profile" />
                           </div>
                         </form>
                     </div>
