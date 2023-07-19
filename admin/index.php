@@ -28,11 +28,11 @@
                                         <i class="fa fa-file-text fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                <?php
-                    $query = "SELECT * FROM posts";
-                    $all_posts_query = mysqli_query($db_connection, $query);
-                    $number_posts = mysqli_num_rows($all_posts_query);
-                ?>
+                    <?php
+                        $query = "SELECT * FROM posts";
+                        $all_posts_query = mysqli_query($db_connection, $query);
+                        $number_posts = mysqli_num_rows($all_posts_query);
+                    ?>
                                     <div class='huge'><?php echo $number_posts;?></div>
                                         <div>Posts</div>
                                     </div>
@@ -138,18 +138,20 @@
 
                         function drawChart() {
                             var data = google.visualization.arrayToDataTable([
-                            ['Year', 'Sales', 'Expenses', 'Profit'],
-                            ['2014', 1000, 400, 200],
-                            ['2015', 1170, 460, 250],
-                            ['2016', 660, 1120, 300],
-                            ['2017', 1030, 540, 350]
+                                ['Date', 'Count'],
+
+                                <?php
+
+                                ?>
+
+                                ['Posts', 1000]
                             ]);
 
                             var options = {
-                            chart: {
-                                title: 'Company Performance',
-                                subtitle: 'Sales, Expenses, and Profit: 2014-2017',
-                            }
+                                chart: {
+                                    title: '',
+                                    subtitle: '',
+                                }
                             };
 
                             var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
@@ -157,7 +159,7 @@
                             chart.draw(data, google.charts.Bar.convertOptions(options));
                         }
                     </script>
-                    <div id="columnchart_material" style="width: 800px; height: 500px;"></div>
+                    <div id="columnchart_material" style="width: 'auto'; height: 500px;"></div>
                 </div>
             </div>
             <!-- /.container-fluid -->
