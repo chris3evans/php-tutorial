@@ -55,7 +55,12 @@
                                         <i class="fa fa-comments fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                    <div class='huge'>23</div>
+                    <?php
+                        $query = "SELECT * FROM comments";
+                        $all_comments_query = mysqli_query($db_connection, $query);
+                        $number_comments = mysqli_num_rows($all_comments_query);
+                    ?>
+                                    <div class='huge'><?php echo $number_comments;?></div>
                                     <div>Comments</div>
                                     </div>
                                 </div>
@@ -77,7 +82,12 @@
                                         <i class="fa fa-user fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                    <div class='huge'>23</div>
+                    <?php
+                        $query = "SELECT * FROM users";
+                        $all_users_query = mysqli_query($db_connection, $query);
+                        $number_users = mysqli_num_rows($all_users_query);
+                    ?>
+                                    <div class='huge'><?php echo $number_users;?></div>
                                         <div> Users</div>
                                     </div>
                                 </div>
@@ -99,7 +109,12 @@
                                         <i class="fa fa-list fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class='huge'>13</div>
+                    <?php
+                        $query = "SELECT * FROM categories";
+                        $all_categories_query = mysqli_query($db_connection, $query);
+                        $number_categories = mysqli_num_rows($all_categories_query);
+                    ?>
+                                        <div class='huge'><?php echo $number_categories;?></div>
                                         <div>Categories</div>
                                     </div>
                                 </div>
