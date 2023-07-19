@@ -28,7 +28,12 @@
                                         <i class="fa fa-file-text fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                <div class='huge'>12</div>
+                <?php
+                    $query = "SELECT * FROM posts";
+                    $all_posts_query = mysqli_query($db_connection, $query);
+                    $number_posts = mysqli_num_rows($all_posts_query);
+                ?>
+                                    <div class='huge'><?php echo $number_posts;?></div>
                                         <div>Posts</div>
                                     </div>
                                 </div>
