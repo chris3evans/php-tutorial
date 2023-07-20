@@ -141,7 +141,13 @@
                                 ['Date', 'Count'],
 
                                 <?php
+                                    $element_text = ['Active Posts', 'Categories', 'Users', 'Comments'];
 
+                                    $element_count = [$number_posts, $number_categories, $number_users, $number_comments];
+
+                                    for ($i = 0; $i < 4; $i++) {
+                                        echo "";
+                                    }
                                 ?>
 
                                 ['Posts', 1000]
