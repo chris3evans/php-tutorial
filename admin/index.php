@@ -141,16 +141,19 @@
                                 ['Date', 'Count'],
 
                                 <?php
-                                    $element_text = ['Active Posts', 'Categories', 'Users', 'Comments'];
+                                    $element_text = ['Active Posts', 'Comments', 'Users', 'Categories'];
 
-                                    $element_count = [$number_posts, $number_categories, $number_users, $number_comments];
+                                    $element_count = [$number_posts, $number_comments, $number_users, $number_categories];
 
                                     for ($i = 0; $i < 4; $i++) {
-                                        echo "";
+                                        echo "['{$element_text[$i]}'" . "," . "{$element_count[$i]}],";
                                     }
+                                    // is dynamically creating:
+                                    // ['Posts', 4]
+                                    // ['Categories', 9]
+                                    // ['Users', 3]
+                                    // ['Comments', 6]
                                 ?>
-
-                                ['Posts', 1000]
                             ]);
 
                             var options = {
