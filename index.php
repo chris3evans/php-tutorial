@@ -28,9 +28,7 @@
                         $post_tags = $row['post_tags'];
                         $post_status = $row['post_status'];
 
-                        if ($post_status !== 'published') {
-                            echo "<h1 class='text-center'>No posts have been published yet!</h1>";
-                        } else {
+                        if ($post_status == 'published') {
                 ?>
                     <h2>
                         <a href='post.php?p_id=<?php echo $post_id; ?>'><?php echo $post_title;?></a>
