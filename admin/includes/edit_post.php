@@ -99,12 +99,6 @@ if (isset($_GET["p_id"])) {
     </select>
   </div>
 
-  <!-- <div class="form-group">
-    <label for="post_status">Post Status</label>
-    <input type="text" class="form-control" name="post_status"
-           value="<?php if (isset($post_status)) echo $post_status; ?>"/>
-  </div> -->
-
   <div class="form-group">
     <label for="post_image">Post Image</label>
     <img src="../images/<?php echo $post_image;?>" width="100"/>
@@ -118,8 +112,8 @@ if (isset($_GET["p_id"])) {
   </div>
 
   <div class="form-group">
-    <label for="post_content">Post Content</label>
-    <textarea class="form-control" name="post_content" id="" cols="30" rows="10"
+    <label for="summernote">Post Content</label>
+    <textarea class="form-control" id="summernote" name="post_content" id="" cols="30" rows="10"
     ><?php if (isset($post_content)) echo $post_content; ?></textarea>
   </div>
 
