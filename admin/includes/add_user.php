@@ -7,10 +7,6 @@
     $user_email = $_POST['user_email'];
     $user_role = $_POST['user_role'];
 
-    // $user_image = $_FILES['user_image']['name'];
-    // $user_image_temp = $_FILES['user_image']['tmp_name'];
-    // move_uploaded_file($user_image_temp, "../images/{$user_image}");
-
     $query = "INSERT INTO users (
       user_name,
       user_password,
@@ -27,6 +23,8 @@
 
     $add_user_query = mysqli_query($db_connection, $query);
     check_query($add_user_query);
+
+    echo "User Created: " . " " . "<a href='users.php'>View Users</a>";
   }
 ?>
 
@@ -48,11 +46,6 @@
       <option value="subscriber">Subscriber</option>
     </select>
   </div>
-
-  <!-- <div class="form-group">
-    <label for="post_image"></label>
-    <input type="file" class="form-control" name="post_image" />
-  </div> -->
 
   <div class="form-group">
     <label for="user_name">Username</label>
