@@ -131,6 +131,24 @@
                 </div>
                 <!-- /.row -->
 
+                <?php
+                    $query = "SELECT * FROM posts WHERE post_status = 'draft'";
+                    $select_all_drafts_query = mysqli_query($db_connection, $query);
+                    $number_draft_posts = mysqli_num_rows($select_all_drafts_query);
+                ?>
+
+                <?php
+                    $query = "SELECT * FROM comments WHERE comment_status = 'unapproved'";
+                    $select_unapproved_comments_query = mysqli_query($db_connection, $query);
+                    $number_unapproved_comments_count = mysqli_num_rows($select_unapproved_comments_query);
+                ?>
+
+                <?php
+                    $query = "SELECT * FROM users WHERE user_role = 'subscriber'";
+                    $select_all_subscribers_query = mysqli_query($db_connection, $query);
+                    $number_subscribers = mysqli_num_rows($select_all_subscribers_query);
+                ?>
+
                 <div class="row">
                     <script type="text/javascript">
                         google.charts.load('current', {'packages':['bar']});
@@ -138,14 +156,29 @@
 
                         function drawChart() {
                             var data = google.visualization.arrayToDataTable([
-                                ['Date', 'Count'],
+                                ['Data', 'Count'],
 
                                 <?php
-                                    $element_text = ['Active Posts', 'Comments', 'Users', 'Categories'];
+                                    $element_text = [
+                                        'Active Posts',
+                                        'Draft Posts',
+                                        'Comments',
+                                        'Pending Comments',
+                                        'Users',
+                                        'Subscribers',
+                                        'Categories'
+                                    ];
 
-                                    $element_count = [$number_posts, $number_comments, $number_users, $number_categories];
+                                    $element_count = [
+                                        $number_posts,
+                                        $number_draft_posts,
+                                        $number_comments, $number_unapproved_comments_count,
+                                        $number_users,
+                                        $number_subscribers,
+                                        $number_categories
+                                    ];
 
-                                    for ($i = 0; $i < 4; $i++) {
+                                    for ($i = 0; $i < 7; $i++) {
                                         echo "['{$element_text[$i]}'" . "," . "{$element_count[$i]}],";
                                     }
                                     // is dynamically creating:
