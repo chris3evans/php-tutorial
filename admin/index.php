@@ -132,6 +132,12 @@
                 <!-- /.row -->
 
                 <?php
+                    $query = "SELECT * FROM posts WHERE post_status = 'published'";
+                    $all_published_posts_query = mysqli_query($db_connection, $query);
+                    $number_published_posts = mysqli_num_rows($all_published_posts_query);
+                ?>
+
+                <?php
                     $query = "SELECT * FROM posts WHERE post_status = 'draft'";
                     $select_all_drafts_query = mysqli_query($db_connection, $query);
                     $number_draft_posts = mysqli_num_rows($select_all_drafts_query);
@@ -160,6 +166,7 @@
 
                                 <?php
                                     $element_text = [
+                                        'All Posts',
                                         'Active Posts',
                                         'Draft Posts',
                                         'Comments',
@@ -171,6 +178,7 @@
 
                                     $element_count = [
                                         $number_posts,
+                                        $number_published_posts,
                                         $number_draft_posts,
                                         $number_comments, $number_unapproved_comments_count,
                                         $number_users,
@@ -178,14 +186,12 @@
                                         $number_categories
                                     ];
 
-                                    for ($i = 0; $i < 7; $i++) {
+                                    for ($i = 0; $i < 8; $i++) {
                                         echo "['{$element_text[$i]}'" . "," . "{$element_count[$i]}],";
                                     }
                                     // is dynamically creating:
                                     // ['Posts', 4]
-                                    // ['Categories', 9]
-                                    // ['Users', 3]
-                                    // ['Comments', 6]
+                                    // ['Categories', 9] ...
                                 ?>
                             ]);
 
