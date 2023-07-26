@@ -15,7 +15,7 @@
           check_query($update_status_draft);
           break;
         case 'delete':
-          $query = "UPDATE posts SET post_status = '{$bulk_options}' WHERE post_id = {$postIdValue}";
+          $query = "DELETE * FROM posts WHERE post_id = {$postIdValue}";
           $update_status_delete = mysqli_query($db_connection, $query);
           check_query($update_status_delete);
           break;
