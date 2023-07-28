@@ -52,6 +52,7 @@
         <th>Tags</th>
         <th>Comments</th>
         <th>Date</th>
+        <th>View</th>
         <th>Edit</th>
         <th>Delete</th>
       </tr>
@@ -102,6 +103,9 @@
           <td><?php echo $post_tags;?></td>
           <td><?php echo $post_comment_count;?></td>
           <td><?php echo $post_date;?></td>
+          <td>
+              <a href="../post.php?p_id=<?php echo $post_id;?>">View</a>
+          </td>
           <td>
             <a href="posts.php?source=edit_post&p_id=<?php echo $post_id; ?>">Edit</a>
           </td>
