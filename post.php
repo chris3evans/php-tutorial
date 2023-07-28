@@ -51,30 +51,36 @@
                         $comment_email = $_POST['comment_email'];
                         $comment_content = $_POST['comment_content'];
 
-                        $query = "INSERT INTO comments (
-                            comment_post_id,
-                            comment_author,
-                            comment_email,
-                            comment_content,
-                            comment_status,
-                            comment_date
-                            ) VALUES (
-                            $post_id,
-                            '{$comment_author}',
-                            '{$comment_email}',
-                            '{$comment_content}',
-                            'unapproved',
-                            now()
-                        )";
-                        $add_comment_query = mysqli_query($db_connection, $query);
+                        if (!empty($comment_author) &&
+                            !empty($comment_email) &&
+                            !empty($comment_content)) {
+                            $query = "INSERT INTO comments (
+                                comment_post_id,
+                                comment_author,
+                                comment_email,
+                                comment_content,
+                                comment_status,
+                                comment_date
+                                ) VALUES (
+                                $post_id,
+                                '{$comment_author}',
+                                '{$comment_email}',
+                                '{$comment_content}',
+                                'unapproved',
+                                now()
+                            )";
+                            $add_comment_query = mysqli_query($db_connection, $query);
 
-                        if (!$add_comment_query) {
-                            die("failed to add comment to post");
+                            if (!$add_comment_query) {
+                                die("failed to add comment to post");
+                            }
+
+                            $query = "UPDATE posts SET post_comment_count = post_comment_count + 1 WHERE post_id = $post_id";
+
+                            $update_comment_count_query = mysqli_query($db_connection, $query);
+                        } else {
+                            echo "<script>alert('Fields cannot be empty')</script>";
                         }
-
-                        $query = "UPDATE posts SET post_comment_count = post_comment_count + 1 WHERE post_id = $post_id";
-
-                        $update_comment_count_query = mysqli_query($db_connection, $query);
                     }
                 ?>
 
