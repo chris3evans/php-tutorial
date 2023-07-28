@@ -16,8 +16,10 @@
 
     $query = "INSERT INTO posts(
       post_category_id,
-      post_title, post_author,
-      post_date, post_image,
+      post_title,
+      post_author,
+      post_date,
+      post_image,
       post_content,
       post_tags,
       post_status) VALUES(
@@ -33,6 +35,14 @@
     $add_post_query = mysqli_query($db_connection, $query);
 
     check_query($add_post_query);
+
+    $the_post_id = mysqli_insert_id($db_connection);
+
+    echo "<p class='bg-success'>Post Updated.
+            <a href='../post.php?p_id={$the_post_id}'>View Post</a>
+            or
+            <a href='posts.php'>Edit More Posts</a>
+          </p>";
   }
 ?>
 
