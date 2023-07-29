@@ -25,6 +25,9 @@
       $user_role = $row['user_role'];
     }
 
+    // decrypt encrypted password retrieved from database
+    $login_password = crypt($login_password, $user_password);
+
     if ($login_username === $user_name && $login_password === $user_password) {
       $_SESSION['username'] = $user_name;
       $_SESSION['first_name'] = $user_first_name;
