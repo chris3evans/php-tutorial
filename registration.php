@@ -2,9 +2,13 @@
 <?php  include "includes/header.php"; ?>
 <?php
     if (isset($_POST['submit'])) {
-        // $registration_username = $_POST['username'];
-        // $registration_email = $_POST['email'];
-        // $registration_password = $_POST['password'];
+        $registration_username = $_POST['username'];
+        $registration_email = $_POST['email'];
+        $registration_password = $_POST['password'];
+
+        $registration_username = mysqli_escape_string($db_connection, $registration_username);
+        $registration_email = mysqli_escape_string($db_connection, $registration_email);
+        $registration_password = mysqli_escape_string($db_connection, $registration_password);
     }
 ?>
 
