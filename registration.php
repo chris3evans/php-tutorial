@@ -1,15 +1,22 @@
 <?php  include "includes/db.php"; ?>
- <?php  include "includes/header.php"; ?>
+<?php  include "includes/header.php"; ?>
+<?php
+    if (isset($_POST['submit'])) {
+        // $registration_username = $_POST['username'];
+        // $registration_email = $_POST['email'];
+        // $registration_password = $_POST['password'];
+    }
+?>
 
 
     <!-- Navigation -->
-    
+
     <?php  include "includes/navigation.php"; ?>
-    
- 
+
+
     <!-- Page Content -->
     <div class="container">
-    
+
 <section id="login">
     <div class="container">
         <div class="row">
@@ -29,10 +36,10 @@
                             <label for="password" class="sr-only">Password</label>
                             <input type="password" name="password" id="key" class="form-control" placeholder="Password">
                         </div>
-                
+
                         <input type="submit" name="submit" id="btn-login" class="btn btn-custom btn-lg btn-block" value="Register">
                     </form>
-                 
+
                 </div>
             </div> <!-- /.col-xs-12 -->
         </div> <!-- /.row -->
