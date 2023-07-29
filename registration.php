@@ -9,6 +9,13 @@
         $registration_username = mysqli_escape_string($db_connection, $registration_username);
         $registration_email = mysqli_escape_string($db_connection, $registration_email);
         $registration_password = mysqli_escape_string($db_connection, $registration_password);
+
+        $query = "SELECT rand_salt FROM users";
+        $select_salt_query = mysqli_query($db_connection, $query);
+
+        if (!$select_salt_query) {
+            die("Failed to fetch salt" . mysqli_error($db_connection));
+        }
     }
 ?>
 
