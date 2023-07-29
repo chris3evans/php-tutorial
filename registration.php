@@ -22,7 +22,9 @@
             }
 
             $row = mysqli_fetch_assoc($select_salt_query);
+
             $salt = $row['rand_salt'];
+            $password = crypt($registration_password, $salt);
 
             $query = "INSERT INTO users (
                 user_name,
@@ -31,7 +33,7 @@
                 user_role) VALUES (
                 '{$registration_username}',
                 '{$registration_email}',
-                '{$registration_password}',
+                '{$password}',
                 'subscriber')";
             $create_user_query = mysqli_query($db_connection, $query);
 
