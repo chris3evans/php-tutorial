@@ -16,6 +16,11 @@
         if (!$select_salt_query) {
             die("Failed to fetch salt" . mysqli_error($db_connection));
         }
+
+        while ($row = mysqli_fetch_assoc($select_salt_query)) {
+            $salt = $row['rand_salt'];
+            echo $salt;
+        }
     }
 ?>
 
