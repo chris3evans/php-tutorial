@@ -30,6 +30,9 @@
                     <li>
                         <a href="admin/index.php">Admin</a>
                     </li>
+                    <li>
+                        <a href="registration.php">Registration</a>
+                    </li>
 
                     <?php
                         if (isset($_SESSION['role'])) {

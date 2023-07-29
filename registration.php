@@ -17,9 +17,22 @@
             die("Failed to fetch salt" . mysqli_error($db_connection));
         }
 
-        while ($row = mysqli_fetch_assoc($select_salt_query)) {
-            $salt = $row['rand_salt'];
-            echo $salt;
+        $row = mysqli_fetch_assoc($select_salt_query);
+        $salt = $row['rand_salt'];
+
+        $query = "INSERT INTO users (
+            user_name,
+            user_email,
+            user_password,
+            user_role) VALUES (
+            '{$registration_username}',
+            '{$registration_email}',
+            '{$registration_password}',
+            'subscriber')";
+        $create_user_query = mysqli_query($db_connection, $query);
+
+        if (!$create_user_query) {
+            die("Failed to create new user" . mysqli_error($db_connection));
         }
     }
 ?>
