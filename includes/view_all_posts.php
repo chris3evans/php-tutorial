@@ -153,7 +153,9 @@
           <td>
             <a onClick="javascript: return confirm('Are you sure you want to delete?');" href="posts.php?delete=<?php echo $post_id; ?>">Delete</a>
           </td>
-          <td><?php echo $post_views;?></td>
+          <td>
+            <a href="posts.php?reset=<?php echo $post_id;?>"><?php echo $post_views;?></a>
+          </td>
         </tr>
       <?php } ?>
     </tbody>
@@ -166,5 +168,15 @@
     $query = "DELETE FROM posts WHERE post_id = '$post_id'";
     $delete_query = mysqli_query($db_connection, $query);
     header("Location: post.php");
+  }
+?>
+
+<?php
+  if (isset($_GET['reset'])) {
+    $post_id = $_GET['reset'];
+
+    $query = "UPDATE posts SET post_views_count = 0 WHERE post_id = {$post_id}";
+    $reset_post_views_query = mysqli_query($db_connection, $query);
+    header("Location: posts.php");
   }
 ?>
