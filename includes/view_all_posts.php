@@ -94,6 +94,7 @@
         <th>View</th>
         <th>Edit</th>
         <th>Delete</th>
+        <th>Post Views</th>
       </tr>
     </thead>
 
@@ -114,6 +115,7 @@
           $post_tags = $row['post_tags'];
           $post_comment_count = $row['post_comment_count'];
           $post_date = $row['post_date'];
+          $post_views = $row['post_views_count'];
       ?>
         <tr>
           <td>
@@ -151,6 +153,7 @@
           <td>
             <a onClick="javascript: return confirm('Are you sure you want to delete?');" href="posts.php?delete=<?php echo $post_id; ?>">Delete</a>
           </td>
+          <td><?php echo $post_views;?></td>
         </tr>
       <?php } ?>
     </tbody>

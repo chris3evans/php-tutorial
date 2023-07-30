@@ -18,30 +18,35 @@
                     if (isset($_GET['p_id'])) {
                         $post_id = $_GET['p_id'];
 
+                        $view_query = "UPDATE posts SET post_views_count = post_views_count + 1 WHERE post_id = {$post_id}";
+                        $retrieve_views_query = mysqli_query($db_connection, $view_query);
 
-                    $query = "SELECT * FROM posts WHERE post_id = '{$post_id}'";
-                    $all_posts = mysqli_query($db_connection, $query);
 
-                    while ($row = mysqli_fetch_assoc($all_posts)) {
-                        $post_title = $row['post_title'];
-                        $post_author = $row['post_author'];
-                        $post_date = $row['post_date'];
-                        $post_image = $row['post_image'];
-                        $post_content = $row['post_content'];
-                        $post_tags = $row['post_tags'];
+                        $query = "SELECT * FROM posts WHERE post_id = '{$post_id}'";
+                        $all_posts = mysqli_query($db_connection, $query);
+
+                        while ($row = mysqli_fetch_assoc($all_posts)) {
+                            $post_title = $row['post_title'];
+                            $post_author = $row['post_author'];
+                            $post_date = $row['post_date'];
+                            $post_image = $row['post_image'];
+                            $post_content = $row['post_content'];
+                            $post_tags = $row['post_tags'];
                 ?>
-                    <h2>
-                        <a href='#'><?php echo $post_title;?></a>
-                    </h2>
-                    <p class='lead'>
-                        by <a href='author_posts.php?author=<?php echo $post_author;?>&p_id=<?php echo $post_id;?>'><?php echo $post_author;?></a>
-                    </p>
-                    <p><span class='glyphicon glyphicon-time'></span> Posted on <?php echo $post_date;?></p>
-                    <hr>
-                    <img class='img-responsive' src='images/<?php echo $post_image;?>' alt=''>
-                    <hr>
-                    <p><?php echo $post_content;?></p>
-               <?php }} ?>
+                        <h2>
+                            <a href='#'><?php echo $post_title;?></a>
+                        </h2>
+                        <p class='lead'>
+                            by <a href='author_posts.php?author=<?php echo $post_author;?>&p_id=<?php echo $post_id;?>'><?php echo $post_author;?></a>
+                        </p>
+                        <p><span class='glyphicon glyphicon-time'></span> Posted on <?php echo $post_date;?></p>
+                        <hr>
+                        <img class='img-responsive' src='images/<?php echo $post_image;?>' alt=''>
+                        <hr>
+                        <p><?php echo $post_content;?></p>
+               <?php }} else {
+                  header("Location: index.php");
+               } ?>
                 <hr>
 
                 <?php
