@@ -1,5 +1,3 @@
-<?php session_start();?>
-
 <?php
     if (isset($_SESSION['username'])) {
         $user_name = $_SESSION['username'];
