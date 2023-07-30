@@ -22,9 +22,24 @@
     $user_email = $_POST['user_email'];
     $user_role = $_POST['user_role'];
 
+    // password encryption
+    // get the salt
+    $salt_query = "SELECT rand_salt FROM users";
+    $get_salt_query = mysqli_query($db_connection, $salt_query);
+
+    if (!$get_salt_query) {
+      die ("Failed to get salt" . mysqli_error($db_connection));
+    }
+
+    $row = mysqli_fetch_assoc($get_salt_query);
+    $salt = $row['rand_salt'];
+    // encrypt password with the salt, submit this
+    $encrypted_password = crypt($user_password, $salt);
+
+
     $query = "UPDATE users SET
       user_name = '{$user_name}',
-      user_password = '{$user_password}',
+      user_password = '{$encrypted_password}',
       first_name = '{$user_first_name}',
       user_last_name = '{$user_last_name}',
       user_email = '{$user_email}',
@@ -75,6 +90,6 @@
   </div>
 
   <div class="form-group">
-    <input class="btn btn-primary" type="submit" name="edit_user" value="Edit User" />
+    <input class="btn btn-primary" type="submit" name="edit_user" value="Update User" />
   </div>
 </form>
