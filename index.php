@@ -15,6 +15,10 @@
                         <small>Secondary Text</small>
                     </h1>
                 <?php
+                    $post_count_query = "SELECT * FROM posts";
+                    $find_count = mysqli_query($db_connection, $post_count_query);
+                    $post_count = mysqli_num_rows($find_count);
+
                     $query = "SELECT * FROM posts";
                     $all_posts = mysqli_query($db_connection, $query);
 
