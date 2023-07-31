@@ -80,10 +80,15 @@
     <ul class="pager">
         <?php
             for($i = 1; $i <= $post_count; $i++) {
-        ?>
-            <li>
-                <a href="index.php?page=<?php echo $i;?>"><?php echo $i;?></a>
-            </li>
+                if ($i == $page) { ?>
+                    <li>
+                        <a class="active-link" href="index.php?page=<?php echo $i;?>"><?php echo $i;?></a>
+                    </li>
+                <?php } else { ?>
+                    <li>
+                        <a href="index.php?page=<?php echo $i;?>"><?php echo $i;?></a>
+                    </li>
+                <?php } ?>
         <?php }?>
     </ul>
 
