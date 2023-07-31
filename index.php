@@ -61,5 +61,15 @@
 
         <hr>
 
+    <ul class="pager">
+        <?php
+            for($i = 1; $i <= $post_count; $i++) {
+        ?>
+            <li>
+                <a href="index.php?page=<?php echo $i;?>"><?php echo $i;?></a>
+            </li>
+        <?php }?>
+    </ul>
+
 <!-- Footer -->
 <?php include "includes/footer.php";?>
