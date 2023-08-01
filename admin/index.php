@@ -2,6 +2,24 @@
 
     <div id="wrapper">
 
+    <?php
+        // session_id() gets or sets the current session id
+        $session = session_id();
+        $time = time();
+        $time_offline_seconds = 60;
+        $time_offline = $time - $time_offline;
+
+        $query = "SELECT * FROM users_online WHERE session = '{$session}";
+
+        $online_query = mysqli_query($db_connection, $query);
+        $online_count = mysqli_num_rows($online_query);
+
+        // if new user logs in, insert time and session into users_online table
+        if ($online_count === NULL) {
+            mysqli_query($db_connection, "INSERT INTO users_online (session, time) VALUES ('$session', '$time')");
+        }
+    ?>
+
     <!-- Navigation -->
     <?php include "includes/admin_navigation.php"; ?>
 
