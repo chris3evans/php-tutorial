@@ -25,3 +25,9 @@ $(document).ready(function () {
       $(this).remove();
     });
 });
+
+const loadUsers = function () {
+  $.get("functions.php?online-users=result", function (data) {
+    $(".users-online").text(data);
+  });
+};
