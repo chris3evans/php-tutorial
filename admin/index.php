@@ -7,17 +7,25 @@
         $session = session_id();
         $time = time();
         $time_offline_seconds = 60;
-        $time_offline = $time - $time_offline;
+        $time_offline = $time - $time_offline_seconds;
 
-        $query = "SELECT * FROM users_online WHERE session = '{$session}";
+        $query = "SELECT * FROM users_online WHERE session = '{$session}'";
 
         $online_query = mysqli_query($db_connection, $query);
         $online_count = mysqli_num_rows($online_query);
 
         // if new user logs in, insert time and session into users_online table
-        if ($online_count === NULL) {
-            mysqli_query($db_connection, "INSERT INTO users_online (session, time) VALUES ('$session', '$time')");
+        if ($online_count == NULL) {
+            $query = "INSERT INTO users_online (session, time) VALUES ('$session', '$time')";
+            mysqli_query($db_connection, $query);
+        } else {
+            $query = "UPDATE users_online SET time = '$time' WHERE session = '$session'";
+            mysqli_query($db_connection, $query);
         }
+
+        $users_online_sql = "SELECT * FROM users_online WHERE time > '$time_offline'";
+        $users_online_query = mysqli_query($db_connection, $users_online_sql);
+        $count_user = mysqli_num_rows($users_online_query);
     ?>
 
     <!-- Navigation -->
@@ -33,6 +41,10 @@
                         <h1 class="page-header">
                             Welcome To Admin
                             <small><?php echo $_SESSION['username'];?></small>
+                        </h1>
+
+                        <h1>
+                            <?php echo $count_user;?>
                         </h1>
                     </div>
                 </div>
