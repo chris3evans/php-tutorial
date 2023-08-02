@@ -26,8 +26,12 @@ $(document).ready(function () {
     });
 });
 
-const loadUsers = function () {
+const loadUsersOnline = function () {
   $.get("functions.php?online-users=result", function (data) {
     $(".users-online").text(data);
   });
 };
+
+setInterval(function () {
+  loadUsersOnline();
+}, 500);

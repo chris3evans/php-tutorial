@@ -1,34 +1,44 @@
 <?php include "../includes/db.php";
   function users_online() {
-    global $db_connection;
-    // session_id() gets or sets the current session id
-    $session = session_id();
-    $time = time();
-    $time_offline_seconds = 30;
-    $time_offline = $time - $time_offline_seconds;
+    if (isset($_GET['online-users'])) {
+      global $db_connection;
 
-    $query = "SELECT * FROM users_online WHERE session = '{$session}'";
+      if (!$db_connection) {
+        session_start();
+        include "../includes/db.php";
 
-    $online_query = mysqli_query($db_connection, $query);
-    $online_count = mysqli_num_rows($online_query);
+        // session_id() gets or sets the current session id
+        $session = session_id();
+        $time = time();
+        $time_offline_seconds = 30;
+        $time_offline = $time - $time_offline_seconds;
 
-    // if new user logs in, insert time and session into users_online table
-    if ($online_count == NULL) {
-        $query = "INSERT INTO users_online (session, time) VALUES ('$session', '$time')";
-        mysqli_query($db_connection, $query);
-    } else {
-        $query = "UPDATE users_online SET time = '$time' WHERE session = '$session'";
-        mysqli_query($db_connection, $query);
+        $query = "SELECT * FROM users_online WHERE session = '{$session}'";
+
+        $online_query = mysqli_query($db_connection, $query);
+        $online_count = mysqli_num_rows($online_query);
+
+        // if new user logs in, insert time and session into users_online table
+        if ($online_count == NULL) {
+            $query = "INSERT INTO users_online (session, time) VALUES ('$session', '$time')";
+            mysqli_query($db_connection, $query);
+        } else {
+            $query = "UPDATE users_online SET time = '$time' WHERE session = '$session'";
+            mysqli_query($db_connection, $query);
+        }
+
+        // will only retrieve users who have been online within the time limit set
+        $users_online_sql = "SELECT * FROM users_online WHERE time > '$time_offline'";
+        $users_online_query = mysqli_query($db_connection, $users_online_sql);
+
+        // the number of users who are online / were online 30 seconds ago
+        $count_user = mysqli_num_rows($users_online_query);
+        echo $count_user;
+      }
     }
-
-    // will only retrieve users who have been online within the time limit set
-    $users_online_sql = "SELECT * FROM users_online WHERE time > '$time_offline'";
-    $users_online_query = mysqli_query($db_connection, $users_online_sql);
-
-    // the number of users who are online / were online 30 seconds ago
-    $count_user = mysqli_num_rows($users_online_query);
-    return $count_user;
   }
+  users_online();
+
   function find_all_categories() {
     global $db_connection;
 
